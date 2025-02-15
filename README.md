@@ -1,5 +1,25 @@
 # shopping-list-api
 
+## Project Structure
+
+```
+.
++-- config
+|   +-- db.js
+|   +-- db.json
++-- src
+|   +-- controllers
+|       +-- item.controller.js
+|       +-- shoppingList.controller.js
+|   +-- models
+|       +-- item.model.js
+|       +-- shoppingList.model.js
+|   +-- services
+|       +-- item.service.js
+|       +-- shoppingList.service.js
++-- app.js
+```
+
 ## Entity Relationship Model
 
 ![ER Model SVG](docs/er-model.svg)
