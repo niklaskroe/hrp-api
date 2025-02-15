@@ -20,7 +20,7 @@ API to manage various shopping lists
 
 ![ER Model SVG](docs/er-model.svg)
 
-## URL & HTTP Verben
+## Endpoints
 
 | Verb  | URL                            | Beschreibung                                                                                                             |
 |-------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------|
