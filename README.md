@@ -1,7 +1,3 @@
-# shopping-list-api
-
-API to manage various shopping lists
-
 ## Commit Guidelines
 
 | Prefix | Usecase |	Example |
