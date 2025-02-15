@@ -1,3 +1,37 @@
+## Installation & Setup
+
+1. Installing all dependencies
+
+To install all dependencies type the following into the terminal:
+
+```
+npm install
+```
+
+or
+
+```
+npm i
+```
+
+After that you should see the _node_modules_ folder appear in the project files.
+
+2. Running the api locally
+
+To start the api and database run the following command in your terminal:
+
+```
+npm start
+```
+
+It should say the following in your terminal window:
+
+```
+Look on http://localhost:8080/
+```
+
+You can now access the api. 
+
 ## Commit Guidelines
 
 | Prefix | Usecase |	Example |
