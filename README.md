@@ -1,4 +1,16 @@
-# shopping-list-api
+## Commit Guidelines
+
+| Prefix | Usecase |	Example |
+| - | - | - |
+| feat |	Implementation of a new feature. |	"feat: add ability to view most popular posts" |
+| fix |	A bug fix (not a build-process fix). |	"fix: check if file exists before attempting to unlink" |
+| docs |	Update to project documentation. |	"docs: add detailed installation instructions for Windows" |
+| style |	Update to code formatting. |	"style: convert from 4 space indentation to 2 spaces" |
+| refactor |	Refactoring of code: A code change that neither fixes a bug nor adds a feature.	| "refactor: rename ArticleController to PostController" |
+| test |	Adding or updating tests. |	"test: add assertions for Collection update and destroy methods" |
+| chore |	Updates to dependencies. |	"chore: bump mssql-jdbc to v11.2.3.jre17" |
+| ci |	Updates to CI/CD related files and scripts |	"ci: add test step to test application performance" |
+| build |	Changes that affect the build system or external dependencies (angular.json, webpack, npm, ...) |	"build: set default ChangeDetection to OnPush for component generation" |
 
 ## Project Structure
 
@@ -24,7 +36,7 @@
 
 ![ER Model SVG](docs/er-model.svg)
 
-## URL & HTTP Verben
+## Endpoints
 
 | Verb  | URL                            | Beschreibung                                                                                                             |
 |-------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------|
