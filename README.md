@@ -68,7 +68,7 @@ You can now access the api.
 
 ## Entity Relationship Model
 
-![ER Model SVG](docs/er-model.svg)
+![ER Model SVG](docs/assets/er-model.svg)
 
 ## Endpoints
 
