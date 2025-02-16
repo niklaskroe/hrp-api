@@ -23,6 +23,7 @@
   "homepage": "https://github.com/niklaskroe/shopping-list#readme",
   "dependencies": {
     "express": "^4.21.2",
+    "mongoose": "^8.10.1",
     "redoc": "^2.4.0"
   }
 }

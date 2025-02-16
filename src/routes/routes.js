@@ -1,4 +1,6 @@
 import express from 'express';
+import mongoose from 'mongoose';
+
 import ShoppingListController from '../controllers/shoppingList.controller.js';
 import ItemController from '../controllers/item.controller.js'
 
@@ -29,5 +31,14 @@ router.get('/item', ItemController.getAll);
 // router.put('/item/:id');
 // router.patch('/item/:id');
 // router.delete('item/:id', ItemController.delete);
+
+router.get("/status", async (req, res) => {
+    const mongoState = mongoose.connection.readyState; // 1 = connected, 0 = disconnected
+  
+    return res.json({
+      status: mongoState === 1 ? "✅ Connected to MongoDB" : "❌ Not Connected",
+      mongoState
+    });
+});
 
 export default router;

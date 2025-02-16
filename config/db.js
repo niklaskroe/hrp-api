@@ -1,14 +1,16 @@
-import { LowSync, JSONFileSync } from 'lowdb';
-import { join } from 'path';
+import mongoose from 'mongoose';
 
-// init
-const file = join(__dirname, '../../db.json');
-const adapter = new JSONFileSync(file);
-const db = new LowSync(adapter);
+const mdb = async () => {
+    try {
+        await mongoose.connect('mongodb://localhost:27017/shoppinglistdb', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log('✅ Connected to database container');
+    } catch (error) {
+        console.error('❌ Error connecting to database: ', error);
+        process.exit(1);
+    }
+};
 
-// default structure
-db.read();
-db.data ||= { users: [], shoppingLists: [], items: [] };
-db.write();
-
-export default db;
+export default mdb;
