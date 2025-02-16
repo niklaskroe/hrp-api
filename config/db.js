@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const mdb = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/shoppinglistdb', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        await mongoose.connect('mongodb://localhost:27017/shoppinglistdb');
         console.log('✅ Connected to database container');
     } catch (error) {
         console.error('❌ Error connecting to database: ', error);
