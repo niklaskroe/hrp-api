@@ -57,18 +57,24 @@ You can now access the api.
 |   +-- controllers
 |       +-- item.controller.js
 |       +-- shoppingList.controller.js
+|       +-- storage.controller.js
 |   +-- models
 |       +-- item.model.js
 |       +-- shoppingList.model.js
+|       +-- storage.model.js
 |   +-- services
 |       +-- item.service.js
 |       +-- shoppingList.service.js
-+-- app.js
+|       +-- storage.service.js
+|   +-- app.js
++-- docker-compose.yml
++-- package.json
++-- package-lock.json
 ```
 
 ## Entity Relationship Model
 
-![ER Model SVG](docs/assets/er-model.svg)
+![ER Model SVG](docs/assets/er-model.png)
 
 ## Endpoints
 
