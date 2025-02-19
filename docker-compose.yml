@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongodb-community-server:
+    hostname: 124267d88743
+    user: mongodb
+    environment:
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+      - HOME=/data/db
+    volumes:
+      - /data/configdb
+      - /data/db
+    network_mode: bridge
+    restart: 'no'
+    labels:
+      - 'description=Container configured with a standalone instance of MongoDB'
+      - maintainer=support@mongodb.com
+      - 'name=MongoDB Standalone'
+      - org.opencontainers.image.ref.name=ubuntu
+      - org.opencontainers.image.version=22.04
+      - 'summary=MongoDB Standalone Container'
+      - vendor=MongoDB
+      - version=8.0.4
+    image: 'mongodb/mongodb-community-server:latest'
