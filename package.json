@@ -22,8 +22,15 @@
   },
   "homepage": "https://github.com/niklaskroe/shopping-list#readme",
   "dependencies": {
-    "express": "^4.21.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.13.8",
+    "dotenv": "^16.4.7",
+    "express": "^5.0.1",
     "mongoose": "^8.10.1",
-    "redoc": "^2.4.0"
+    "nodemon": "^3.1.9",
+    "redoc": "^2.4.0",
+    "typescript": "^5.8.2"
   }
 }

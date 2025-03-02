@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, {model, Schema} from "mongoose";
 
-const itemSchema = new mongoose.Schema({
+const itemSchema = new Schema({
   name: { type: String, required: true },
   quantity: { type: Number, required: true },
   unit: { type: String, required: true },
@@ -8,3 +8,7 @@ const itemSchema = new mongoose.Schema({
   storage: { type: mongoose.Schema.Types.ObjectId, ref: "Storage" },
   shoppingList: { type: mongoose.Schema.Types.ObjectId, ref: "ShoppingList" }
 });
+
+const Item = model("Item", itemSchema);
+
+export default Item;
