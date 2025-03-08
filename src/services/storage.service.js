@@ -1,51 +1,52 @@
 import Storage from "../models/storage.model.js";
+import logging from "logging";
+import Item from "../models/item.model.js";
 
-async function test() {
-    console.log("Testing StorageService");
-}
+const logger = logging.default("StorageService");
 
 async function getAll() {
-    const data = Storage.find();
-    console.log(data);
+    return Storage.find({}, undefined, undefined);
 }
 
 async function getById(id) {
-    const storage = Storage.findById(id, (err, storage) => {
-        if (err) {
-            console.error("Error getting storage by id:", err);
-        }
-    }, {runValidators: true});
-    console.log(storage);
+    return Storage.findById(id, undefined, undefined);
 }
 
 async function create(storage) {
     try {
-        const newStorage = await Storage.create(storage, {validateBeforeSave: true});
-
-        console.log("Storage created:", newStorage);
-        return true;
+        return await Storage.create(storage, undefined);
     } catch (error) {
-        console.error("Error creating storage:", error);
-        return false;
+        logger.error("Error creating storage:", error);
+        throw new Error(error.message);
     }
 }
 
 async function update(id, storage) {
     try {
-        const updatedStorage = await Storage.findByIdAndUpdate
-            (id, storage, {new: true, runValidators: true});
-    }
-    catch (error) {
-        console.error("Error updating storage:", error);
+        return await Storage.findByIdAndUpdate(id, storage, undefined);
+    } catch (error) {
+        logger.error("Error updating storage:", error);
+        throw new Error(error.message);
     }
 }
 
 async function deleteById(id) {
     try {
-        const deletedStorage = await Storage.findByIdAndDelete(id);
+        return await Storage.findByIdAndDelete(id, undefined);
     } catch (error) {
-        console.error("Error deleting storage:", error);
+        logger.error("Error deleting storage:", error);
+        throw new Error(error.message)
     }
 }
 
-export default {test, getAll, getById, create, update, deleteById};
+async function search(query) {
+    try {
+        // regex for case-insensitive search
+        return await Storage.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
+    } catch (error) {
+        logger.error("Error searching for storages:", error);
+        console.error("Error searching for storages:", error);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search};

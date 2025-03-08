@@ -1,31 +1,82 @@
-import storageService from '../services/storage.service.js';
+import storageService from "../services/storage.service.js";
 import express from "express";
+import itemService from "../services/item.service.js";
 
 const storageController = express.Router();
 
 storageController.get('/storages', async (req, res) => {
-    res.send("GET /storages");
-    await storageService.test();
+    try {
+        let data = null;
+        if (req.query.search) {
+            data = await storageService.search(req.query.search);
+        } else {
+            data = await storageService.getAll();
+        }
+
+        if (!data || data.length === 0) {
+            res.status(404).send("No storages found.");
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 storageController.get('/storages/:id', async (req, res) => {
-    res.send("GET /storages/" + req.params.id);
+    try {
+        const data = await storageService.getById(req.params.id);
+
+        if (!data) {
+            res.status(404).send(`Storage with id ${req.params.id} not found.`);
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 storageController.post('/storages', async (req, res) => {
-    res.send("POST /storages: " + JSON.stringify(req.body));
-});
-
-storageController.put('/storages/:id', async (req, res) => {
-    res.send("PUT /storages/" + req.params.id + ": " + JSON.stringify(req.body));
+    try {
+        const newStorage = await storageService.create(req.body);
+        res.status(201).json(newStorage);
+    } catch (error) {
+        res.status(400).send("Bad Request: " + error.message);
+    }
 });
 
 storageController.patch('/storages/:id', async (req, res) => {
-    res.send("PATCH /storages/" + req.params.id + ": " + JSON.stringify(req.body));
+    try {
+        const updatedStorage = await storageService.update(req.params.id, req.body);
+
+        if (!updatedStorage) {
+            return res.status(404).send(`Storage with id ${req.params.id} not found.`);
+        }
+
+        res.json(updatedStorage);
+    } catch (error) {
+        res.status(400).send("Bad Request: " + error.message);
+    }
 });
 
 storageController.delete('/storages/:id', async (req, res) => {
-    res.send("DELETE /storages/" + req.params.id);
+    try {
+        const deletedStorage = await storageService.deleteById(req.params.id);
+
+        if (!deletedStorage) {
+            return res.status(404).send(`Storage with id ${req.params.id} not found.`);
+        }
+
+        // remove storage from all items
+        await itemService.removeStorageFromItems(req.params.id);
+
+        res.json(deletedStorage);
+    } catch (error) {
+        res.status(400).send("Bad Request: " + error.message);
+    }
 });
 
 export default storageController;

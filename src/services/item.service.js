@@ -48,4 +48,13 @@ async function search(query) {
     }
 }
 
-export default {getAll, getById, create, update, deleteById, search};
+async function removeStorageFromItems(storageId) {
+    try {
+        return await Item.updateMany({storage: storageId}, {storage: null});
+    } catch (error) {
+        logger.error("Error removing storage from items:", error);
+        throw new Error(error.message);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search, removeStorageFromItems};
