@@ -52,32 +52,6 @@ You can now access the api.
 | ci       | Updates to CI/CD related files and scripts                                                      | "ci: add test step to test application performance"                     |
 | build    | Changes that affect the build system or external dependencies (angular.json, webpack, npm, ...) | "build: set default ChangeDetection to OnPush for component generation" |
 
-## Project Structure
-
-```
-.
-+-- config
-|   +-- database.js
-|   +-- db.json
-+-- src
-|   +-- controllers
-|       +-- item.controller.js
-|       +-- shoppingList.controller.js
-|       +-- storage.controller.js
-|   +-- models
-|       +-- item.model.js
-|       +-- shoppingList.model.js
-|       +-- storage.model.js
-|   +-- services
-|       +-- item.service.js
-|       +-- shoppingList.service.js
-|       +-- storage.service.js
-|   +-- main.js
-+-- docker-compose.yml
-+-- package.json
-+-- package-lock.json
-```
-
 ## Entity Relationship Model
 
 ![ER Model SVG](docs/assets/er-model.png)
