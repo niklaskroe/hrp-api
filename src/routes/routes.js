@@ -4,11 +4,6 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
-// TODO: UI with endpoint overview
-router.get('/', (req, res) => {
-    res.send("imagine some UI here")
-})
-
 /** storages routes */
 // router.get('/storages', StorageController.getAll);
 // router.get('/storages/:id', StorageController.getById);
