@@ -51,7 +51,7 @@ You can now access the api.
 ```
 .
 +-- config
-|   +-- db.js
+|   +-- database.js
 |   +-- db.json
 +-- src
 |   +-- controllers
@@ -66,7 +66,7 @@ You can now access the api.
 |       +-- item.service.js
 |       +-- shoppingList.service.js
 |       +-- storage.service.js
-|   +-- app.js
+|   +-- main.js
 +-- docker-compose.yml
 +-- package.json
 +-- package-lock.json

@@ -1,73 +1,77 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
-import ShoppingListController from '../controllers/shoppingList.controller.js';
-import ItemController from '../controllers/item.controller.js'
+// import { ItemController } from "../controllers/item.controller.js";
 
 const router = express.Router();
 
 // TODO: UI with endpoint overview
+router.get('/', (req, res) => {
+    res.send("imagine some UI here")
+})
 
-/** storage routes */
-router.get('/storage', StorageController.getAll);
-// router.get('/storage/:id', StorageController.getById);
+/** storages routes */
+// router.get('/storages', StorageController.getAll);
+// router.get('/storages/:id', StorageController.getById);
 
-// router.post('/storage', StorageController.create);
-// router.put('/storage/:id', StorageController.update);
-// router.patch('/storage/:id', StorageController.patch);
-// router.delete('/storage/:id', StorageController.delete);
+// router.post('/storages', StorageController.create);
+// router.put('/storages/:id', StorageController.update);
+// router.patch('/storages/:id', StorageController.patch);
+// router.delete('/storages/:id', StorageController.delete);
 
-// router.get('/storage/:id/items', StorageController.getItems);
-// router.post('/storage/:id/items', StorageController.createItem);
-// router.get('/storage/1/items/:id', StorageController.getItem);
-// router.put('/storage/1/items/:id', StorageController.updateItem);
-// router.patch('/storage/1/items/:id', StorageController.patchItem);
-// router.delete('/storage/1/items/:id', StorageController.deleteItem)
+// router.get('/storages/:id/items', StorageController.getItems);
+// router.post('/storages/:id/items', StorageController.createItem);
+// router.get('/storages/1/items/:id', StorageController.getItem);
+// router.put('/storages/1/items/:id', StorageController.updateItem);
+// router.patch('/storages/1/items/:id', StorageController.patchItem);
+// router.delete('/storages/1/items/:id', StorageController.deleteItem)
 
-/** item routes */
-router.get('/item', ItemController.getAll);
+/** items routes */
+//router.get('/items', ItemController.getAllItems);
 
-// router.get('/item/:id');
-// router.post('/item', ItemController.create);
-// router.put('/item/:id');
-// router.patch('/item/:id');
-// router.delete('item/:id', ItemController.delete);
+// router.get('/items/:id');
+//router.post('/items', ItemController.create);
+// router.put('/items/:id');
+// router.patch('/items/:id');
+// router.delete('items/:id', ItemController.delete);
 
-/** shopping-list routes */
-router.get('/shopping-list', ShoppingListController.getAll);
+/** shopping-lists routes */
+// router.get('/shopping-lists', ShoppingListController.getAll);
 
-// router.get('/shopping-list/:id', ShoppingListController.getOne);
-// router.post('/shopping-list', ShoppingListController.create);
-// router.put('/shopping-list/:id', ShoppingListController.put);
-// router.patch('/shopping-list/:id', ShoppingListController.patch);
-// router.delete('/shopping-list/:id', ShoppingListController.delete);
+// router.get('/shopping-lists/:id', ShoppingListController.getOne);
+// router.post('/shopping-lists', ShoppingListController.create);
+// router.put('/shopping-lists/:id', ShoppingListController.put);
+// router.patch('/shopping-lists/:id', ShoppingListController.patch);
+// router.delete('/shopping-lists/:id', ShoppingListController.delete);
 
-// router.get('/shopping-list/:id/items', ShoppingListController.getOne);
+// router.get('/shopping-lists/:id/items', ShoppingListController.getOne);
 
-// router.post('/shopping-list/:id/items');
-// router.get('shopping-list/:listId/items/:itemId');
-// router.put('/shopping-list/:listId/items/:itemId');
-// router.patch('/shopping-list/:listId/items/:itemId');
+// router.post('/shopping-lists/:id/items');
+// router.get('shopping-lists/:listId/items/:itemsId');
+// router.put('/shopping-lists/:listId/items/:itemsId');
+// router.patch('/shopping-lists/:listId/items/:itemsId');
 
-/** storage item relationship */
-// router.get('/item/:id/storage', ItemController.getStorage);
-// router.patch('/item/:id/storage', ItemController.patchStorage);
-// router.put('/item/:id/storage', ItemController.putStorage);
-// router.delete('/item/:id/storage', ItemController.deleteStorage);
+/**
+ * optional relationships - view p.2 under "REST-Webservice"
+ * */
+/** storages items relationship */
+// router.get('/items/:id/storages', ItemController.getStorage);
+// router.patch('/items/:id/storages', ItemController.patchStorage);
+// router.put('/items/:id/storages', ItemController.putStorage);
+// router.delete('/items/:id/storages', ItemController.deleteStorage);
 
-/** item shopping-list relationship */
-// router.get('/item/:id/shopping-list');
-// router.patch('/item/:id/shopping-list');
-// router.put('/item/:id/shopping-list');
-// router.delete('/item/:id/shopping-list');
+/** items shopping-lists relationship */
+// router.get('/items/:id/shopping-lists');
+// router.patch('/items/:id/shopping-lists');
+// router.put('/items/:id/shopping-lists');
+// router.delete('/items/:id/shopping-lists');
 
 
 router.get("/status", async (req, res) => {
     const mongoState = mongoose.connection.readyState; // 1 = connected, 0 = disconnected
-  
+
     return res.json({
-      status: mongoState === 1 ? "✅ Connected to MongoDB" : "❌ Not Connected",
-      mongoState
+        status: mongoState === 1 ? "✅ Connected to MongoDB" : "❌ Not Connected",
+        mongoState
     });
 });
 
