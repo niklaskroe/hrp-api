@@ -44,7 +44,7 @@ async function search(query) {
         return await Item.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
     } catch (error) {
         logger.error("Error searching for items:", error);
-        console.error("Error searching for items:", error);
+        throw new Error(error.message);
     }
 }
 
@@ -57,4 +57,13 @@ async function removeStorageFromItems(storageId) {
     }
 }
 
-export default {getAll, getById, create, update, deleteById, search, removeStorageFromItems};
+async function removeShoppingListFromItems(shoppingListId) {
+    try {
+        return await Item.updateMany({shoppingList: shoppingListId}, {shoppingList: null});
+    } catch (error) {
+        logger.error("Error removing shopping list from items:", error);
+        throw new Error(error.message);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search, removeStorageFromItems, removeShoppingListFromItems};

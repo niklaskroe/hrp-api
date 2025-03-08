@@ -1,36 +1,82 @@
 import shoppingListService from '../services/shoppingList.service.js';
 import express from 'express';
+import itemService from "../services/item.service.js";
 
 const shoppingListController = express.Router();
 
-shoppingListController.get('/shopping-lists', (req, res) => {
-    res.send("GET /shopping-lists");
-    shoppingListService.getAll();
+shoppingListController.get('/shopping-lists', async (req, res) => {
+    try {
+        let data = null;
+        if (req.query.search) {
+            data = await shoppingListService.search(req.query.search);
+        } else {
+            data = await shoppingListService.getAll();
+        }
+
+        if (!data || data.length === 0) {
+            res.status(404).send('No shopping lists found.');
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-shoppingListController.get('/shopping-lists/:id', (req, res) => {
-    res.send("GET /shopping-lists/" + req.params.id);
-    shoppingListService.getOne();
+shoppingListController.get('/shopping-lists/:id', async (req, res) => {
+    try {
+        const data = await shoppingListService.getById(req.params.id);
+
+        if (!data) {
+            res.status(404).send(`Shopping list with id ${req.params.id} not found.`);
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-shoppingListController.post('/shopping-lists', (req, res) => {
-    res.send("POST /shopping-lists: " + JSON.stringify(req.body));
-    shoppingListService.create();
+shoppingListController.post('/shopping-lists', async (req, res) => {
+    try {
+        const newShoppingList = await shoppingListService.create(req.body);
+        res.status(201).json(newShoppingList);
+    } catch (error) {
+        res.status(400).send('Bad Request: ' + error.message);
+    }
 });
 
-shoppingListController.put('/shopping-lists/:id', (req, res) => {
-    res.send("PUT /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
-    shoppingListService.update();
+shoppingListController.patch('/shopping-lists/:id', async (req, res) => {
+    try {
+        const updatedShoppingList = await shoppingListService.update(req.params.id, req.body);
+
+        if (!updatedShoppingList) {
+            return res.status(404).send(`Shopping list with id ${req.params.id} not found.`);
+        }
+
+        res.json(updatedShoppingList);
+    } catch (error) {
+        res.status(400).send('Bad Request: ' + error.message);
+    }
 });
 
-shoppingListController.patch('/shopping-lists/:id', (req, res) => {
-    res.send("PATCH /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
-    shoppingListService.patch();
-});
+shoppingListController.delete('/shopping-lists/:id', async (req, res) => {
+    try {
+        const deletedShoppingList = await shoppingListService.deleteById(req.params.id);
 
-shoppingListController.delete('/shopping-lists/:id', (req, res) => {
-    res.send("DELETE /shopping-lists/" + req.params.id);
-    shoppingListService.delete();
+        if (!deletedShoppingList) {
+            return res.status(404).send(`Shopping list with id ${req.params.id} not found.`);
+        }
+
+        // remove storage from all items
+        await itemService.removeShoppingListFromItems(req.params.id);
+
+        res.json(deletedShoppingList);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 export default shoppingListController;

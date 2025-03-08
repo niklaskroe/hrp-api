@@ -1,49 +1,51 @@
 import ShoppingList from '../models/shoppingList.model.js';
+import logging from "logging";
 
-async function test() {
-    console.log("Testing ShoppingListService");
-}
+const logger = logging.default("ShoppingListService");
 
 async function getAll() {
-    const data = ShoppingList.find();
-    console.log(data);
+    return ShoppingList.find({}, undefined, undefined);
 }
 
 async function getById(id) {
-    const shoppingList = ShoppingList.findById(id, (err, shoppingList) => {
-        if (err) {
-            console.error("Error getting shoppingList by id:", err);
-        }
-    }, {runValidators: true});
-    console.log(shoppingList);
+    return ShoppingList.findById(id, undefined, undefined);
 }
 
 async function create(shoppingList) {
     try {
-        const newShoppingList = await ShoppingList.create(shoppingList, {validateBeforeSave: true});
-
-        console.log("ShoppingList created:", newShoppingList);
-        return true;
+        return await ShoppingList.create(shoppingList, undefined);
     } catch (error) {
-        console.error("Error creating shoppingList:", error);
-        return false;
+        logger.error("Error creating shoppingList:", error);
+        throw new Error(error.message);
     }
 }
 
 async function update(id, shoppingList) {
     try {
-        const updatedShoppingList = await ShoppingList.findByIdAndUpdate(id, shoppingList, {new: true, runValidators: true});
+        return await ShoppingList.findByIdAndUpdate(id, shoppingList, undefined);
     } catch (error) {
-        console.error("Error updating shoppingList:", error);
+        logger.error("Error updating shoppingList:", error);
+        throw new Error(error.message);
     }
 }
 
 async function deleteById(id) {
     try {
-        const deletedShoppingList = await ShoppingList.findByIdAndDelete(id);
+        return await ShoppingList.findByIdAndDelete(id, undefined);
     } catch (error) {
-        console.error("Error deleting shoppingList:", error);
+        logger.error("Error deleting shoppingList:", error);
+        throw new Error(error.message);
     }
 }
 
-export default {test, getAll, getById, create, update, deleteById};
+async function search(query) {
+    try {
+        // case-insensitive search
+        return await ShoppingList.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
+    } catch (error) {
+        logger.error("Error searching for shoppingLists:", error);
+        throw new Error(error.message);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search};
