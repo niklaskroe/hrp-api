@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import mqtt from "mqtt";
 
 import favicon from "serve-favicon";
 import dotenv from "dotenv";
@@ -24,6 +25,21 @@ const config = {
 const logger = logging.default("main");
 
 const app = express();
+
+logger.info("Connecting to MQTT server...");
+
+const mqttClient = await mqtt.connectAsync(process.env.MQTT_BROKER, {
+    username: process.env.MQTT_USER,
+    password: process.env.MQTT_PASSWORD
+})
+
+if (!process.env.MQTT_TOPIC || !process.env.MQTT_TOPIC.trim()) {
+    throw new Error("Environment variable MQTT_TOPIC is not defined!");
+}
+
+mqttClient.on('connect', () => {
+    logger.info('Connected to MQTT server');
+});
 
 /**
  * @description logging used method and url
