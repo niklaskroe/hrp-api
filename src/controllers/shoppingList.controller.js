@@ -1,15 +1,34 @@
-// Mock data for demonstration purposes
-let shoppingList = [
-    { id: 1, name: 'Milk', quantity: 2 },
-    { id: 2, name: 'Bread', quantity: 1 },
-    { id: 3, name: 'Eggs', quantity: 12 }
-];
+import ShoppingListService from '../services/shoppingList.service.js';
+import express from 'express';
 
-// Controller functions
-const getAll = (req, res) => {
-    res.json(shoppingList);
-};
+const ShoppingListController = express.Router();
 
-export default {
-    getAll
-};
+ShoppingListController.get('/shopping-lists', (req, res) => {
+    res.send("GET /shopping-lists");
+    ShoppingListService.getAll();
+});
+
+ShoppingListController.get('/shopping-lists/:id', (req, res) => {
+    res.send("GET /shopping-lists/" + req.params.id);
+    ShoppingListService.getOne();
+});
+
+ShoppingListController.post('/shopping-lists', (req, res) => {
+    res.send("POST /shopping-lists: " + JSON.stringify(req.body));
+    ShoppingListService.create();
+});
+
+ShoppingListController.put('/shopping-lists/:id', (req, res) => {
+    res.send("PUT /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
+    ShoppingListService.update();
+});
+
+ShoppingListController.patch('/shopping-lists/:id', (req, res) => {
+    res.send("PATCH /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
+    ShoppingListService.patch();
+});
+
+ShoppingListController.delete('/shopping-lists/:id', (req, res) => {
+    res.send("DELETE /shopping-lists/" + req.params.id);
+    ShoppingListService.delete();
+});

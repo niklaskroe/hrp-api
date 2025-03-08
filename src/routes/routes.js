@@ -5,7 +5,6 @@ import ItemController from "../controllers/item.controller.js";
 
 /** storages routes */
 
-
 // router.get('/storages/:id/items', StorageController.getItems);
 // router.post('/storages/:id/items', StorageController.createItem);
 // router.get('/storages/1/items/:id', StorageController.getItem);
@@ -23,14 +22,6 @@ import ItemController from "../controllers/item.controller.js";
 // router.delete('items/:id', ItemController.delete);
 
 /** shopping-lists routes */
-// router.get('/shopping-lists', ShoppingListController.getAll);
-
-// router.get('/shopping-lists/:id', ShoppingListController.getOne);
-// router.post('/shopping-lists', ShoppingListController.create);
-// router.put('/shopping-lists/:id', ShoppingListController.put);
-// router.patch('/shopping-lists/:id', ShoppingListController.patch);
-// router.delete('/shopping-lists/:id', ShoppingListController.delete);
-
 // router.get('/shopping-lists/:id/items', ShoppingListController.getOne);
 
 // router.post('/shopping-lists/:id/items');
