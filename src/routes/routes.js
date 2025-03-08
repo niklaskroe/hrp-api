@@ -4,13 +4,7 @@ import mongoose from 'mongoose';
 import ItemController from "../controllers/item.controller.js";
 
 /** storages routes */
-// router.get('/storages', StorageController.getAll);
-// router.get('/storages/:id', StorageController.getById);
 
-// router.post('/storages', StorageController.create);
-// router.put('/storages/:id', StorageController.update);
-// router.patch('/storages/:id', StorageController.patch);
-// router.delete('/storages/:id', StorageController.delete);
 
 // router.get('/storages/:id/items', StorageController.getItems);
 // router.post('/storages/:id/items', StorageController.createItem);
