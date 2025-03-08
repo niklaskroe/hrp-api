@@ -8,13 +8,17 @@ async function connect() {
         await mongoose.connect('mongodb://localhost:27017/shoppinglistdb');
         logger.info('Connected to database container.');
     } catch (error) {
-        console.error('❌ Error connecting to database: ', error);
+        logger.error('❌ Error connecting to database: ', error);
         process.exit(1);
     }
 }
 
+function clearDatabase() {
+    return mongoose.connection.dropDatabase();
+}
+
 function close() {
-    mongoose.connection.close().then(r => {
+    mongoose.connection.close().then(() => {
         logger.info('Database connection closed.');
     });
 }
