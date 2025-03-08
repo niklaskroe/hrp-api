@@ -41,7 +41,7 @@ You can now access the api.
 ## Commit Guidelines
 
 | Prefix   | Usecase                                                                                         | Example                                                                 |
-| -------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | feat     | Implementation of a new feature.                                                                | "feat: add ability to view most popular posts"                          |
 | fix      | A bug fix (not a build-process fix).                                                            | "fix: check if file exists before attempting to unlink"                 |
 | docs     | Update to project documentation.                                                                | "docs: add detailed installation instructions for Windows"              |
@@ -58,43 +58,39 @@ You can now access the api.
 
 ## Endpoints
 
-| Verb   | URL                         | Description                                                                                                                                                                                           |
-|--------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| GET    | /shopping-list              | Retrieve all shopping lists (Collection).                                                                                                                                                             |
-| GET    | /shopping-list/{id}         | Retrieve a shopping list (resource) that has the {id}.                                                                                                                                                |
-| GET    | /shopping-list/{id}/items   | Returns all items (collection) of a shopping list (resource) with the {id}.                                                                                                                           |
-| POST   | /shopping-list/{id}/items   | Creates a new item (resource) in the shopping list (collection) with the {id}.                                                                                                                        |
-| GET    | /shopping-list/1/items/{id} | Returns an item (resource) with the {id} that belongs to the shopping list with ID 1.                                                                                                                 |
-| PUT    | /shopping-list/1/items/{id} | Updates an item (resource) with the {id} in shopping list 1 with the fields provided in the request body.                                                                                             |
-| PATCH  | /shopping-list/1/items/{id} | Updates an item (resource) with the {id} in shopping list 1 with the fields provided in the request body.                                                                                             |
-| DELETE | /shopping-list/1/items/{id} | Deletes an item (resource) with the {id} in shopping list 1.                                                                                                                                          |
-| POST   | /shopping-list              | Creates a new shopping list (resource) with the data provided in the request body.                                                                                                                    |
-| PUT    | /shopping-list/{id}         | Updates a shopping list (resource) with the {id} using the data provided in the request body. Depending on the configuration, this may also allow creating a new resource with the request body data. |
-| PATCH  | /shopping-list/{id}         | Updates an existing shopping list with the {id}. The request body contains only the fields to be overwritten.                                                                                         |
-| DELETE | /shopping-list/{id}         | Deletes the shopping list (resource) with the {id}.                                                                                                                                                   |
-| GET    | /item                       | Returns all items (collection) that exist.                                                                                                                                                            |
-| GET    | /item/{id}                  | Returns the item (resource) with the {id}.                                                                                                                                                            |
-| GET    | /item/{id}/shopping-list    | Returns the shopping list (resource) of the item with the {id}.                                                                                                                                       |
-| PATCH  | /item/{id}/shopping-list    | Updates the shopping list of the item with the {id} using the fields provided in the request body.                                                                                                    |
-| PUT    | /item/{id}/shopping-list    | Updates the shopping list of the item with the {id} using the fields provided in the request body.                                                                                                    |
-| DELETE | /item/{id}/shopping-list    | Deletes the shopping list of the item with the {id}.                                                                                                                                                  |
-| POST   | /item                       | Creates a new item with the data provided in the request body.                                                                                                                                        |
-| PUT    | /item/{id}                  | Updates an item (resource) with the {id} using the data provided in the request body. Depending on the configuration, this may also allow creating a new resource with the request body data.         |
-| PATCH  | /item/{id}                  | Updates an existing item with the {id}. The request body contains only the fields to be overwritten.                                                                                                  |
-| DELETE | /item/{id}                  | Deletes the item (resource) with the {id}.                                                                                                                                                            |
-| GET    | /storage                    | Retrieve all storages (Collection).                                                                                                                                                                   |
-| GET    | /storage/{id}               | Retrieve a storage (resource) that has the {id}.                                                                                                                                                      |
-| GET    | /storage/{id}/items         | Returns all items (collection) of a storage (resource) with the {id}.                                                                                                                                 |
-| POST   | /storage/{id}/items         | Creates a new item (resource) in the storage (collection) with the {id}.                                                                                                                              |
-| GET    | /storage/1/items/{id}       | Returns an item (resource) with the {id} that belongs to the storage with ID 1.                                                                                                                       |
-| PUT    | /storage/1/items/{id}       | Updates an item (resource) with the {id} in storage 1 with the fields provided in the request body.                                                                                                   |
-| PATCH  | /storage/1/items/{id}       | Updates an item (resource) with the {id} in storage 1 with the fields provided in the request body.                                                                                                   |
-| DELETE | /storage/1/items/{id}       | Deletes an item (resource) with the {id} in storage 1.                                                                                                                                                |
-| POST   | /storage                    | Creates a new storage (resource) with the data provided in the request body.                                                                                                                          |
-| PUT    | /storage/{id}               | Updates a storage (resource) with the {id} using the data provided in the request body. Depending on the configuration, this may also allow creating a new resource with the request body data        |
-| PATCH  | /storage/{id}               | Updates an existing storage with the {id}. The request body contains only the fields to be overwritten.                                                                                               |
-| DELETE | /storage/{id}               | Deletes the storage (resource) with the {id}.                                                                                                                                                         |
-| GET    | /item/{id}/storage          | Returns the storage (resource) of the item with the {id}.                                                                                                                                             |
-| PATCH  | /item/{id}/storage          | Updates the storage of the item with the {id} using the fields provided in the request body.                                                                                                          |
-| PUT    | /item/{id}/storage          | Updates the storage of the item with the {id} using the fields provided in the request body.                                                                                                          |
-| DELETE | /item/{id}/storage          | Deletes the storage of the item with the {id}.                                                                                                                                                        |
+| Verb   | URL                           | Description                                                                                                   |
+|--------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
+| GET    | /shopping-list                | Retrieve all shopping lists (Collection).                                                                     |
+| GET    | /shopping-list/{id}           | Retrieve a shopping list (resource) that has the {id}.                                                        |
+| GET    | /shopping-list/{id}/items     | Returns all items (collection) of a shopping list (resource) with the {id}.                                   |
+| POST   | /shopping-list/{id}/items     | Creates a new item (resource) in the shopping list (collection) with the {id}.                                |
+| GET    | /shopping-list/1/items/{id}   | Returns an item (resource) with the {id} that belongs to the shopping list with ID 1.                         |
+| PATCH  | /shopping-list/1/items/{id}   | Updates an item (resource) with the {id} in shopping list 1 with the fields provided in the request body.     |
+| DELETE | /shopping-list/1/items/{id}   | Deletes an item (resource) with the {id} in shopping list 1.                                                  |
+| POST   | /shopping-list                | Creates a new shopping list (resource) with the data provided in the request body.                            |
+| PATCH  | /shopping-list/{id}           | Updates an existing shopping list with the {id}. The request body contains only the fields to be overwritten. |
+| DELETE | /shopping-list/{id}           | Deletes the shopping list (resource) with the {id}.                                                           |
+| GET    | /items                        | Returns all items (collection) that exist.                                                                    |
+| GET    | /items/{id}                   | Returns the item (resource) with the {id}.                                                                    |
+| GET    | /items/{id}/shopping-list     | Returns the shopping list (resource) of the item with the {id}.                                               |
+| PATCH  | /items/{id}/shopping-list     | Updates the shopping list of the item with the {id} using the fields provided in the request body.            |
+| DELETE | /items/{id}/shopping-list     | Deletes the shopping list of the item with the {id}.                                                          |
+| POST   | /items                        | Creates a new item with the data provided in the request body.                                                |
+| PATCH  | /items/{id}                   | Updates an existing item with the {id}. The request body contains only the fields to be overwritten.          |
+| DELETE | /items/{id}                   | Deletes the item (resource) with the {id}.                                                                    |
+| GET    | /storage                      | Retrieve all storages (Collection).                                                                           |
+| GET    | /storage/{id}                 | Retrieve a storage (resource) that has the {id}.                                                              |
+| GET    | /storage/{id}/items           | Returns all items (collection) of a storage (resource) with the {id}.                                         |
+| POST   | /storage/{id}/items           | Creates a new item (resource) in the storage (collection) with the {id}.                                      |
+| GET    | /storage/1/items/{id}         | Returns an item (resource) with the {id} that belongs to the storage with ID 1.                               |
+| PATCH  | /storage/1/items/{id}         | Updates an item (resource) with the {id} in storage 1 with the fields provided in the request body.           |
+| DELETE | /storage/1/items/{id}         | Deletes an item (resource) with the {id} in storage 1.                                                        |
+| POST   | /storage                      | Creates a new storage (resource) with the data provided in the request body.                                  |
+| PATCH  | /storage/{id}                 | Updates an existing storage with the {id}. The request body contains only the fields to be overwritten.       |
+| DELETE | /storage/{id}                 | Deletes the storage (resource) with the {id}.                                                                 |
+| GET    | /items/{id}/storage           | Returns the storage (resource) of the item with the {id}.                                                     |
+| PATCH  | /items/{id}/storage           | Updates the storage of the item with the {id} using the fields provided in the request body.                  |
+| DELETE | /items/{id}/storage           | Deletes the storage of the item with the {id}.                                                                |
+| GET    | /items?search={query}         | Returns all items (collection) that match the search query.                                                   |
+| GET    | /shopping-list?search={query} | Returns all shopping lists (collection) that match the search query.                                          |
+| GET    | /storage?search={query}       | Returns all storages (collection) that match the search query.                                                |
