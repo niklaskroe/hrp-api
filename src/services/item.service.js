@@ -1,28 +1,21 @@
 import Item from "../models/item.model.js"
 
-const defaultData = [
-    {
-        name: "Apple",
-        quantity: 10,
-        unit: "kg",
-        expiration_date: new Date("2025-06-01"),
-        storage: null,
-        shoppingList: null
-    },
-    {
-        name: "Banana",
-        quantity: 5,
-        unit: "pieces",
-        expiration_date: new Date("2025-04-26"),
-        storage: null,
-        shoppingList: null
-    }
-]
-
+async function test() {
+    console.log("Testing ItemService");
+}
 
 async function getAll() {
     const data = Item.find();
     console.log(data);
+}
+
+async function getById(id) {
+    const item = Item.findById(id, (err, item) => {
+        if (err) {
+            console.error("Error getting item by id:", err);
+        }
+    }, {runValidators: true});
+    console.log(item);
 }
 
 async function create(item) {
@@ -37,4 +30,20 @@ async function create(item) {
     }
 }
 
-export default {getAll, create};
+async function update(id, item) {
+    try {
+        const updatedItem = await Item.findByIdAndUpdate(id, item, {new: true, runValidators: true});
+    } catch (error) {
+        console.error("Error updating item:", error);
+    }
+}
+
+async function deleteById(id) {
+    try {
+        const deletedItem = await Item.findByIdAndDelete(id);
+    } catch (error) {
+        console.error("Error deleting item:", error);
+    }
+}
+
+export default {test, getAll, getById, create, update, deleteById};
