@@ -21,7 +21,13 @@ After that you should see the _node_modules_ folder appear in the project files.
 To start the api and database run the following command in your terminal:
 
 ```
-npm start
+npm run start
+```
+
+or in developer mode with nodemon:
+
+```
+npm run start:dev
 ```
 
 It should say the following in your terminal window:
