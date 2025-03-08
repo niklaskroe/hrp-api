@@ -1,49 +1,51 @@
 import Item from "../models/item.model.js"
+import logging from "logging";
 
-async function test() {
-    console.log("Testing ItemService");
-}
+const logger = logging.default("ItemService");
 
 async function getAll() {
-    const data = Item.find();
-    console.log(data);
+    return Item.find({}, undefined, undefined);
 }
 
 async function getById(id) {
-    const item = Item.findById(id, (err, item) => {
-        if (err) {
-            console.error("Error getting item by id:", err);
-        }
-    }, {runValidators: true});
-    console.log(item);
+    return Item.findById(id, undefined, undefined);
 }
 
 async function create(item) {
     try {
-        const newItem = await Item.create(item, {validateBeforeSave: true});
-
-        console.log("Item created:", newItem);
-        return true;
+        return await Item.create(item, undefined);
     } catch (error) {
-        console.error("Error creating item:", error);
-        return false;
+        logger.error("Error creating item:", error);
+        throw new Error(error.message);
     }
 }
 
 async function update(id, item) {
     try {
-        const updatedItem = await Item.findByIdAndUpdate(id, item, {new: true, runValidators: true});
+        return await Item.findByIdAndUpdate(id, item, undefined);
     } catch (error) {
-        console.error("Error updating item:", error);
+        logger.error("Error updating item:", error);
+        throw new Error(error.message);
     }
 }
 
 async function deleteById(id) {
     try {
-        const deletedItem = await Item.findByIdAndDelete(id);
+        return await Item.findByIdAndDelete(id, undefined);
     } catch (error) {
-        console.error("Error deleting item:", error);
+        logger.error("Error deleting item:", error);
+        throw new Error(error.message)
     }
 }
 
-export default {test, getAll, getById, create, update, deleteById};
+async function search(query) {
+    try {
+        // regex for case-insensitive search
+        return await Item.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
+    } catch (error) {
+        logger.error("Error searching for items:", error);
+        console.error("Error searching for items:", error);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search};
