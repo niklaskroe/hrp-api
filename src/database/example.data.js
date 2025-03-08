@@ -1,4 +1,4 @@
-import ItemService from "./services/item.service.js";
+import ItemService from "../services/item.service.js";
 
 const defaultData = [{
     items: [

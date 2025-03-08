@@ -7,7 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import url from "node:url";
 
-import db from "./database.js";
+import db from "./database/database.js";
 import itemController from "./controllers/item.controller.js";
 import mongoose from "mongoose";
 //import storageController from "./controllers/storage.controller.js";
