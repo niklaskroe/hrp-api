@@ -3,7 +3,6 @@ import express from "express";
 
 const itemController = express.Router();
 
-// Controller functions
 itemController.get("/items", async (req, res) => {
     res.send("GET /items");
     await ItemService.test();
