@@ -1,4 +1,4 @@
-import Storage from "../models/storage.model";
+import Storage from "../models/storage.model.js";
 
 async function test() {
     console.log("Testing StorageService");

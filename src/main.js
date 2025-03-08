@@ -1,4 +1,6 @@
 import express from "express";
+import mongoose from "mongoose";
+
 import favicon from "serve-favicon";
 import dotenv from "dotenv";
 import logging from "logging";
@@ -9,9 +11,8 @@ import url from "node:url";
 
 import db from "./database/database.js";
 import itemController from "./controllers/item.controller.js";
-import mongoose from "mongoose";
-//import storageController from "./controllers/storage.controller.js";
-//import shoppingListController from "./controllers/shoppingList.controller.js";
+import storageController from "./controllers/storage.controller.js";
+import shoppingListController from "./controllers/shoppingList.controller.js";
 
 dotenv.config();
 
@@ -44,7 +45,7 @@ app.use(express.static(staticDir));
 app.use(express.json());
 app.use(favicon(path.join(__dirname, '../public/kitchen.svg')));
 
-app.use(itemController);
+app.use(itemController, storageController, shoppingListController);
 
 db.connect().then(() => logger.info("Database connected."));
 

@@ -1,34 +1,36 @@
-import ShoppingListService from '../services/shoppingList.service.js';
+import shoppingListService from '../services/shoppingList.service.js';
 import express from 'express';
 
-const ShoppingListController = express.Router();
+const shoppingListController = express.Router();
 
-ShoppingListController.get('/shopping-lists', (req, res) => {
+shoppingListController.get('/shopping-lists', (req, res) => {
     res.send("GET /shopping-lists");
-    ShoppingListService.getAll();
+    shoppingListService.getAll();
 });
 
-ShoppingListController.get('/shopping-lists/:id', (req, res) => {
+shoppingListController.get('/shopping-lists/:id', (req, res) => {
     res.send("GET /shopping-lists/" + req.params.id);
-    ShoppingListService.getOne();
+    shoppingListService.getOne();
 });
 
-ShoppingListController.post('/shopping-lists', (req, res) => {
+shoppingListController.post('/shopping-lists', (req, res) => {
     res.send("POST /shopping-lists: " + JSON.stringify(req.body));
-    ShoppingListService.create();
+    shoppingListService.create();
 });
 
-ShoppingListController.put('/shopping-lists/:id', (req, res) => {
+shoppingListController.put('/shopping-lists/:id', (req, res) => {
     res.send("PUT /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
-    ShoppingListService.update();
+    shoppingListService.update();
 });
 
-ShoppingListController.patch('/shopping-lists/:id', (req, res) => {
+shoppingListController.patch('/shopping-lists/:id', (req, res) => {
     res.send("PATCH /shopping-lists/" + req.params.id + ": " + JSON.stringify(req.body));
-    ShoppingListService.patch();
+    shoppingListService.patch();
 });
 
-ShoppingListController.delete('/shopping-lists/:id', (req, res) => {
+shoppingListController.delete('/shopping-lists/:id', (req, res) => {
     res.send("DELETE /shopping-lists/" + req.params.id);
-    ShoppingListService.delete();
+    shoppingListService.delete();
 });
+
+export default shoppingListController;

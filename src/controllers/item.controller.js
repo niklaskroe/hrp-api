@@ -1,11 +1,11 @@
-import ItemService from "../services/item.service.js";
+import itemService from "../services/item.service.js";
 import express from "express";
 
 const itemController = express.Router();
 
 itemController.get("/items", async (req, res) => {
     res.send("GET /items");
-    await ItemService.test();
+    await itemService.test();
 });
 
 itemController.get("/items/:id", async (req, res) => {

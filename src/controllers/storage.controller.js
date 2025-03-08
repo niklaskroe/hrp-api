@@ -1,11 +1,11 @@
-import StorageService from '../services/storage.service';
+import storageService from '../services/storage.service.js';
 import express from "express";
 
 const storageController = express.Router();
 
 storageController.get('/storages', async (req, res) => {
     res.send("GET /storages");
-    await StorageService.test();
+    await storageService.test();
 });
 
 storageController.get('/storages/:id', async (req, res) => {
