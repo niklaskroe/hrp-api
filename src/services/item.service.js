@@ -1,29 +1,40 @@
-import { Item}  from "../models/item.model.js"
+import Item from "../models/item.model.js"
 
-class ItemService {
-    async getAll() {
-        const data = Item.find();
-        console.log(data);
+const defaultData = [
+    {
+        name: "Apple",
+        quantity: 10,
+        unit: "kg",
+        expiration_date: new Date("2025-06-01"),
+        storage: null,
+        shoppingList: null
+    },
+    {
+        name: "Banana",
+        quantity: 5,
+        unit: "pieces",
+        expiration_date: new Date("2025-04-26"),
+        storage: null,
+        shoppingList: null
     }
+]
 
-    async create() {
-        try {
-            const newItem = await Item.create({
-                name: "Apple",
-                quantity: 10,
-                unit: "kg",
-                expiration_date: new Date("2025-03-01"),
-                storage: null,
-                shoppingList: null
-            });
 
-            console.log("Item created:", newItem);
-            return true;
-        } catch (error) {
-            console.error("Error creating item:", error);
-            return false;
-        }
+async function getAll() {
+    const data = Item.find();
+    console.log(data);
+}
+
+async function create(item) {
+    try {
+        const newItem = await Item.create(item, {validateBeforeSave: true});
+
+        console.log("Item created:", newItem);
+        return true;
+    } catch (error) {
+        console.error("Error creating item:", error);
+        return false;
     }
 }
 
-export {ItemService}
+export default {getAll, create};

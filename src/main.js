@@ -1,14 +1,17 @@
-import express from 'express'
-import favicon from 'serve-favicon';
-import dotenv from 'dotenv';
-import logging from 'logging';
-import process from 'node:process';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import url from 'node:url';
+import express from "express";
+import favicon from "serve-favicon";
+import dotenv from "dotenv";
+import logging from "logging";
+import process from "node:process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import url from "node:url";
 
 import db from "./database.js";
-import routes from './routes/routes.js';
+import itemController from "./controllers/item.controller.js";
+import mongoose from "mongoose";
+//import storageController from "./controllers/storage.controller.js";
+//import shoppingListController from "./controllers/shoppingList.controller.js";
 
 dotenv.config();
 
@@ -40,12 +43,22 @@ app.use(express.static(staticDir));
 
 app.use(express.json());
 app.use(favicon(path.join(__dirname, '../public/kitchen.svg')));
-app.use(routes);
+
+app.use(itemController);
 
 db.connect().then(() => logger.info("Database connected."));
 
 const server = app.listen(config.port, config.host, () => {
     logger.info(`Server listening on http://${config.host}:${config.port}`);
+});
+
+app.get("/status", async (req, res) => {
+    const mongoState = mongoose.connection.readyState; // 1 = connected, 0 = disconnected
+
+    return res.json({
+        status: mongoState === 1 ? "✅ Connected to MongoDB" : "❌ Not Connected",
+        mongoState
+    });
 });
 
 process.on("SIGTERM", () => {

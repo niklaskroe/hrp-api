@@ -1,8 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-// import { ItemController } from "../controllers/item.controller.js";
 
-const router = express.Router();
+import ItemController from "../controllers/item.controller.js";
 
 /** storages routes */
 // router.get('/storages', StorageController.getAll);
@@ -21,7 +20,7 @@ const router = express.Router();
 // router.delete('/storages/1/items/:id', StorageController.deleteItem)
 
 /** items routes */
-//router.get('/items', ItemController.getAllItems);
+//router.get('/items', ItemController.getAll());
 
 // router.get('/items/:id');
 //router.post('/items', ItemController.create);
@@ -61,13 +60,6 @@ const router = express.Router();
 // router.delete('/items/:id/shopping-lists');
 
 
-router.get("/status", async (req, res) => {
-    const mongoState = mongoose.connection.readyState; // 1 = connected, 0 = disconnected
 
-    return res.json({
-        status: mongoState === 1 ? "✅ Connected to MongoDB" : "❌ Not Connected",
-        mongoState
-    });
-});
 
 export default router;

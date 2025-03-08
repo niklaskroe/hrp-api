@@ -8,3 +8,5 @@ const itemSchema = new mongoose.Schema({
   storage: { type: mongoose.Schema.Types.ObjectId, ref: "Storage" },
   shoppingList: { type: mongoose.Schema.Types.ObjectId, ref: "ShoppingList" }
 });
+
+export default mongoose.model("Item", itemSchema);

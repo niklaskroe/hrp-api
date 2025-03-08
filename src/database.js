@@ -19,6 +19,4 @@ function close() {
     });
 }
 
-const defaultData = {};
-
 export default {connect, close}

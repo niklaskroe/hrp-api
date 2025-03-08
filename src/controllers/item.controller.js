@@ -1,15 +1,16 @@
-// Mock data for demonstration purposes
-let shoppingList = [
-    { id: 1, name: 'Milk', quantity: 2 },
-    { id: 2, name: 'Bread', quantity: 1 },
-    { id: 3, name: 'Eggs', quantity: 12 }
-];
+import ItemService from "../services/item.service.js";
+import express from "express";
+import mongoose from "mongoose";
+
+const itemController = express.Router();
 
 // Controller functions
-const getAll = (req, res) => {
-    res.json(shoppingList);
-};
+itemController.get("/items", async (req, res) => {
+    res.send("GET /items");
+});
 
-export default {
-    getAll
-};
+itemController.get("/items/:id", async (req, res) => {
+    res.send("GET /items/" + req.params.id);
+});
+
+export default itemController;
