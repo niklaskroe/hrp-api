@@ -48,4 +48,13 @@ async function search(query) {
     }
 }
 
-export default {getAll, getById, create, update, deleteById, search};
+async function getItems(shoppingListId) {
+    try {
+        return await Item.find({shoppingList: shoppingListId}, undefined, undefined);
+    } catch (error) {
+        logger.error("Error getting items by shoppingList:", error);
+        throw new Error(error.message);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search, getItems};
