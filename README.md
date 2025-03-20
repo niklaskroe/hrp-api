@@ -62,7 +62,7 @@ You can now access the api.
 |-------------|--------|-------------------------------|---------------------------------------------------------------------------------------------------------------|
 | ✔           | GET    | /shopping-list                | Retrieve all shopping lists (Collection).                                                                     |
 | ✔           | GET    | /shopping-list/{id}           | Retrieve a shopping list (resource) that has the {id}.                                                        |
-|             | GET    | /shopping-list/{id}/items     | Returns all items (collection) of a shopping list (resource) with the {id}.                                   |
+| ✔           | GET    | /shopping-list/{id}/items     | Returns all items (collection) of a shopping list (resource) with the {id}.                                   |
 |             | POST   | /shopping-list/{id}/items     | Creates a new item (resource) in the shopping list (collection) with the {id}.                                |
 | ✔           | POST   | /shopping-list                | Creates a new shopping list (resource) with the data provided in the request body.                            |
 | ✔           | PATCH  | /shopping-list/{id}           | Updates an existing shopping list with the {id}. The request body contains only the fields to be overwritten. |
@@ -77,7 +77,7 @@ You can now access the api.
 | ✔           | DELETE | /items/{id}                   | Deletes the item (resource) with the {id}.                                                                    |
 | ✔           | GET    | /storage                      | Retrieve all storages (Collection).                                                                           |
 | ✔           | GET    | /storage/{id}                 | Retrieve a storage (resource) that has the {id}.                                                              |
-|             | GET    | /storage/{id}/items           | Returns all items (collection) of a storage (resource) with the {id}.                                         |
+| ✔           | GET    | /storage/{id}/items           | Returns all items (collection) of a storage (resource) with the {id}.                                         |
 |             | POST   | /storage/{id}/items           | Creates a new item (resource) in the storage (collection) with the {id}.                                      |
 | ✔           | POST   | /storage                      | Creates a new storage (resource) with the data provided in the request body.                                  |
 | ✔           | PATCH  | /storage/{id}                 | Updates an existing storage with the {id}. The request body contains only the fields to be overwritten.       |
