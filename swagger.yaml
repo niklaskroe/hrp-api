@@ -1,0 +1,387 @@
+openapi: 3.0.0
+info:
+  title: Inventory Management API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /items:
+    get:
+      summary: Get all items
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search query for items
+      responses:
+        '200':
+          description: A list of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: No items found
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':
+          description: Item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '400':
+          description: Bad Request
+  /items/{id}:
+    get:
+      summary: Get item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+        '500':
+          description: Internal Server Error
+    patch:
+      summary: Update an item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete an item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Item deleted
+        '404':
+          description: Item not found
+        '500':
+          description: Internal Server Error
+  /shopping-lists:
+    get:
+      summary: Get all shopping lists
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search query for shopping lists
+      responses:
+        '200':
+          description: A list of shopping lists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShoppingList'
+        '404':
+          description: No shopping lists found
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new shopping list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingList'
+      responses:
+        '201':
+          description: Shopping list created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '400':
+          description: Bad Request
+  /shopping-lists/{id}:
+    get:
+      summary: Get shopping list by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A shopping list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '404':
+          description: Shopping list not found
+        '500':
+          description: Internal Server Error
+    patch:
+      summary: Update a shopping list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingList'
+      responses:
+        '200':
+          description: Shopping list updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '404':
+          description: Shopping list not found
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete a shopping list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Shopping list deleted
+        '404':
+          description: Shopping list not found
+        '500':
+          description: Internal Server Error
+  /shopping-lists/{id}/items:
+    get:
+      summary: Get items in a shopping list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of items in the shopping list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: No items found
+        '500':
+          description: Internal Server Error
+  /storages:
+    get:
+      summary: Get all storages
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search query for storages
+      responses:
+        '200':
+          description: A list of storages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Storage'
+        '404':
+          description: No storages found
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new storage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Storage'
+      responses:
+        '201':
+          description: Storage created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        '400':
+          description: Bad Request
+  /storages/{id}:
+    get:
+      summary: Get storage by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A storage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        '404':
+          description: Storage not found
+        '500':
+          description: Internal Server Error
+    patch:
+      summary: Update a storage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Storage'
+      responses:
+        '200':
+          description: Storage updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+        '404':
+          description: Storage not found
+        '400':
+          description: Bad Request
+    delete:
+      summary: Delete a storage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Storage deleted
+        '404':
+          description: Storage not found
+        '500':
+          description: Internal Server Error
+  /storages/{id}/items:
+    get:
+      summary: Get items in a storage
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of items in the storage
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '404':
+          description: No items found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
+        expiration_date:
+          type: string
+          format: date
+        storage:
+          type: string
+        shoppingList:
+          type: string
+    ShoppingList:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Storage:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
