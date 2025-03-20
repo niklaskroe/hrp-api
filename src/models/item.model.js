@@ -5,7 +5,7 @@ const itemSchema = new mongoose.Schema({
   quantity: { type: Number, required: true },
   unit: { type: String, required: true },
   expiration_date: { type: Date, required: false },
-  storage: { type: mongoose.Schema.Types.ObjectId, ref: "Storage" },
+  storage: { type: mongoose.Schema.Types.ObjectId, ref: "Storage" , required: true},
   shoppingList: { type: mongoose.Schema.Types.ObjectId, ref: "ShoppingList" }
 });
 
