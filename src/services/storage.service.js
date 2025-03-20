@@ -49,4 +49,13 @@ async function search(query) {
     }
 }
 
-export default {getAll, getById, create, update, deleteById, search};
+async function getItems(storageId) {
+    try {
+        return await Item.find({storage: storageId}, undefined, undefined);
+    } catch (error) {
+        logger.error("Error getting items by storage:", error);
+        throw new Error(error.message);
+    }
+}
+
+export default {getAll, getById, create, update, deleteById, search, getItems};
