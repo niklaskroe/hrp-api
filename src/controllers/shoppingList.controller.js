@@ -79,4 +79,19 @@ shoppingListController.delete('/shopping-lists/:id', async (req, res) => {
     }
 });
 
+shoppingListController.get('/shopping-lists/:id/items', async (req, res) => {
+    try {
+        const data = await shoppingListService.getItems(req.params.id);
+
+        if (!data || data.length === 0) {
+            res.status(404).send(`No items found for shopping list with id ${req.params.id}.`);
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 export default shoppingListController;

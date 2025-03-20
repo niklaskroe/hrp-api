@@ -3,14 +3,29 @@ import logging from "logging";
 
 const logger = logging.default("ItemService");
 
+/**
+ * fetch all items
+ * @returns {Promise<Item[]>}
+ */
 async function getAll() {
     return Item.find({}, undefined, undefined);
 }
 
+/**
+ * fetch item by id
+ * @param {string} id
+ * @returns {Promise<Item>}
+ */
 async function getById(id) {
     return Item.findById(id, undefined, undefined);
 }
 
+/**
+ * create a new item
+ * @param {Item} item
+ * @returns {Promise<Item>}
+ * @throws {Error}
+ */
 async function create(item) {
     try {
         return await Item.create(item, undefined);
@@ -20,6 +35,13 @@ async function create(item) {
     }
 }
 
+/**
+ * update an item
+ * @param {String} id
+ * @param {Item} item
+ * @returns {Promise<Item>}
+ * @throws {Error}
+ */
 async function update(id, item) {
     try {
         return await Item.findByIdAndUpdate(id, item, undefined);
@@ -29,6 +51,12 @@ async function update(id, item) {
     }
 }
 
+/**
+ * delete an item by id
+ * @param {String} id
+ * @returns {Promise<Item>}
+ * @throws {Error}
+ */
 async function deleteById(id) {
     try {
         return await Item.findByIdAndDelete(id, undefined);
@@ -38,6 +66,12 @@ async function deleteById(id) {
     }
 }
 
+/**
+ * search for items by name
+ * @param {String} query
+ * @returns {Promise<Item[]>}
+ * @throws {Error}
+ */
 async function search(query) {
     try {
         // regex for case-insensitive search
@@ -48,6 +82,12 @@ async function search(query) {
     }
 }
 
+/**
+ * remove storage from items
+ * @param {String} storageId
+ * @returns {Promise<Query>}
+ * @throws {Error}
+ */
 async function removeStorageFromItems(storageId) {
     try {
         return await Item.updateMany({storage: storageId}, {storage: null});
@@ -57,6 +97,12 @@ async function removeStorageFromItems(storageId) {
     }
 }
 
+/**
+ * remove shopping list from items
+ * @param {String} shoppingListId
+ * @returns {Promise<Query>}
+ * @throws {Error}
+ */
 async function removeShoppingListFromItems(shoppingListId) {
     try {
         return await Item.updateMany({shoppingList: shoppingListId}, {shoppingList: null});

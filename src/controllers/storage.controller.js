@@ -79,4 +79,19 @@ storageController.delete('/storages/:id', async (req, res) => {
     }
 });
 
+storageController.get('/storages/:id/items', async (req, res) => {
+    try {
+        const data = await storageService.getItems(req.params.id);
+
+        if (!data || data.length === 0) {
+            res.status(404).send("No items found in this storage.");
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 export default storageController;
