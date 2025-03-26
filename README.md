@@ -1,6 +1,14 @@
 ## Installation & Setup
 
-### 1. Installing all dependencies
+### 1. Pulling and running Docker Container
+
+```
+docker-compose up
+```
+
+To check if the container is running type `docker ps`. You should see `shoppinglistdb` in the list.
+
+### 2. Installing Project Dependencies
 
 To install all dependencies type the following into the terminal:
 
@@ -16,9 +24,9 @@ npm i
 
 After that you should see the _node_modules_ folder appear in the project files.
 
-### 2. Running the api locally
+### 3. Running the API
 
-To start the api and database run the following command in your terminal:
+To start the API:
 
 ```
 npm run start
@@ -30,13 +38,40 @@ or in developer mode with nodemon:
 npm run start:dev
 ```
 
-It should say the following in your terminal window:
+It should say the following in your console:
 
 ```
-Look on http://localhost:8080/
+[MQTTService] Connecting to MQTT
+[main] Server listening on http://localhost:8080
+[database] Connected to database container.
+[main] Database connected.
+[MQTTService] Connected to MQTT server.
 ```
 
 You can now access the api.
+
+### 4. Receiving MQTT messages
+
+To recieve the MQTT messages published by the HRP API run the following command in another console window / tab:
+
+```
+npm run mqtt
+```
+
+or in developer mode with nodemon:
+
+```
+npm run mqtt
+```
+
+It should say the following in your console:
+
+```
+[MQTTSubscriber] Connected to MQTT server.
+[MQTTSubscriber] 🔔 Subscribed to WWI23B2/kroeger/items
+[MQTTSubscriber] 🔔 Subscribed to WWI23B2/kroeger/storages
+[MQTTSubscriber] 🔔 Subscribed to WWI23B2/kroeger/shopping-lists
+```
 
 ## Commit Guidelines
 
