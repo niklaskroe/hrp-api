@@ -14,6 +14,7 @@ import itemController from "./controllers/item.controller.js";
 import storageController from "./controllers/storage.controller.js";
 import shoppingListController from "./controllers/shoppingList.controller.js";
 import mqttPublisher from "./mqtt/mqtt.publisher.js";
+import setupSwagger from "./swagger.js";
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ app.use(express.static(staticDir));
 app.use(express.json());
 app.use(favicon(path.join(__dirname, '../public/kitchen.svg')));
 
+setupSwagger(app);
+
 app.use(itemController, storageController, shoppingListController);
 
 db.connect().then(() => logger.info("Database connected."));
@@ -73,5 +76,6 @@ process.on("SIGTERM", () => {
 process.on("SIGINT", () => {
     logger.info("\nSIGINT received. Closing Server.");
     db.close();
+    process.exit();
     server.close();
 });
