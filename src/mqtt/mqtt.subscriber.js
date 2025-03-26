@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 const logger = logging.default('MQTTSubscriber');
 dotenv.config();
 
+const subtopics = ["items", "storages", "shopping-lists"];
+
 let mqttClient;
 
 (function connect() {
@@ -38,13 +40,15 @@ function subscribe() {
         return;
     }
 
-    mqttClient.subscribe(`${process.env.MQTT_TOPIC}/items`, (error) => {
-        if (error) {
-            logger.error(`Error subscribing to MQTT topic: `, error);
-        } else {
-            logger.info(`🔔 Subscribed to ${process.env.MQTT_TOPIC}/items`);
-        }
-    });
+    subtopics.forEach(subtopic => {
+        mqttClient.subscribe(`${process.env.MQTT_TOPIC}/${subtopic}`, (error) => {
+            if (error) {
+                logger.error(`Error subscribing to MQTT topic: `, error);
+            } else {
+                logger.info(`🔔 Subscribed to ${process.env.MQTT_TOPIC}/${subtopic}`);
+            }
+        });
+    })
 
     mqttClient.on("message", (topic, message) => {
         logger.info(`📩 Message received on ${topic}: ${message.toString()}`);
