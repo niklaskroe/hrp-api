@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/main.js",
     "start:dev": "nodemon src/main.js",
-    "mqtt:subscribe": "node src/mqtt/mqtt.subscriber.js"
+    "mqtt": "node src/mqtt/mqtt.subscriber.js",
+    "mqtt:dev": "nodemon src/mqtt/mqtt.subscriber.js"
   },
   "repository": {
     "type": "git",
