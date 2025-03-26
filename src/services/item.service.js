@@ -13,7 +13,7 @@ async function getAll() {
 
 /**
  * fetch item by id
- * @param {string} id
+ * @param {String} id
  * @returns {Promise<Item>}
  */
 async function getById(id) {
