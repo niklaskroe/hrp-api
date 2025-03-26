@@ -1,23 +1,52 @@
-version: '3'
 services:
-  mongodb-community-server:
-    hostname: 124267d88743
-    user: mongodb
-    environment:
-      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-      - HOME=/data/db
+  mongodb:
+    image: mongo:latest
+    container_name: shoppinglistdb
+    restart: always
+    ports:
+      - '27017:27017'
     volumes:
-      - /data/configdb
-      - /data/db
-    network_mode: bridge
-    restart: 'no'
-    labels:
-      - 'description=Container configured with a standalone instance of MongoDB'
-      - maintainer=support@mongodb.com
-      - 'name=MongoDB Standalone'
-      - org.opencontainers.image.ref.name=ubuntu
-      - org.opencontainers.image.version=22.04
-      - 'summary=MongoDB Standalone Container'
-      - vendor=MongoDB
-      - version=8.0.4
-    image: 'mongodb/mongodb-community-server:latest'
+      - mongo_data:/data/db
+
+  hrp-api:
+    build:
+      context: ./
+      dockerfile: Dockerfile.api
+    container_name: hrp-api
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      - PORT=8080
+      - MONGODB_URI=mongodb://mongodb:27017/shoppinglistdb
+      - MQTT_BROKER=wss://mqtt.zimolong.eu
+      - MQTT_USERNAME=dhbw
+      - MQTT_PASSWORD=dhbw
+      - MQTT_TOPIC=WWI23B2/kroeger
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start
+
+  mqtt-subscriber:
+    build:
+      context: ./
+      dockerfile: Dockerfile.subscriber
+    container_name: mqtt-subscriber
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      - MQTT_BROKER=wss://mqtt.zimolong.eu
+      - MQTT_USERNAME=dhbw
+      - MQTT_PASSWORD=dhbw
+      - MQTT_TOPIC=WWI23B2/kroeger
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run mqtt
+
+volumes:
+  mongo_data:
