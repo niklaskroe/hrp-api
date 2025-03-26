@@ -1,6 +1,7 @@
 import storageService from "../services/storage.service.js";
 import express from "express";
 import itemService from "../services/item.service.js";
+import mqttPublisher from "../mqtt/mqtt.publisher.js";
 
 const storageController = express.Router();
 
@@ -42,6 +43,9 @@ storageController.get('/storages/:id', async (req, res) => {
 storageController.post('/storages', async (req, res) => {
     try {
         const newStorage = await storageService.create(req.body);
+
+        mqttPublisher.publish("storages", "post", req.body.url, JSON.stringify(newStorage));
+
         res.status(201).json(newStorage);
     } catch (error) {
         res.status(400).send("Bad Request: " + error.message);
@@ -56,6 +60,8 @@ storageController.patch('/storages/:id', async (req, res) => {
             return res.status(404).send(`Storage with id ${req.params.id} not found.`);
         }
 
+        mqttPublisher.publish("storages", "patch", req.body.url, JSON.stringify(updatedStorage));
+
         res.json(updatedStorage);
     } catch (error) {
         res.status(400).send("Bad Request: " + error.message);
@@ -69,6 +75,8 @@ storageController.delete('/storages/:id', async (req, res) => {
         if (!deletedStorage) {
             return res.status(404).send(`Storage with id ${req.params.id} not found.`);
         }
+
+        mqttPublisher.publish("storages", "delete", req.params.id);
 
         // remove storage from all items
         await itemService.removeStorageFromItems(req.params.id);

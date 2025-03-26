@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "node src/main.js",
-    "start:dev": "nodemon src/main.js"
+    "start:dev": "nodemon src/main.js",
+    "mqtt": "node src/mqtt/mqtt.subscriber.js",
+    "mqtt:dev": "nodemon src/mqtt/mqtt.subscriber.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "express": "^4.21.2",
     "logging": "^3.3.0",
     "mongoose": "^8.10.1",
+    "mqtt": "^5.10.4",
     "nodemon": "^3.1.9",
     "redoc": "^2.4.0",
     "serve-favicon": "^2.5.0",
