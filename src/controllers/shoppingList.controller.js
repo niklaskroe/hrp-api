@@ -44,7 +44,7 @@ shoppingListController.post('/shopping-lists', async (req, res) => {
     try {
         const newShoppingList = await shoppingListService.create(req.body);
 
-        mqttPublisher.publishAsync("shopping-lists", "post", req.body.url, JSON.stringify(newShoppingList));
+        mqttPublisher.publish("shopping-lists", "post", req.body.url, JSON.stringify(newShoppingList));
 
         res.status(201).json(newShoppingList);
     } catch (error) {
