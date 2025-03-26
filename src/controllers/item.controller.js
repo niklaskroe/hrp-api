@@ -43,7 +43,7 @@ itemController.post("/items", async (req, res, next) => {
     try {
         const newItem = await itemService.create(req.body);
 
-        await mqttPublisher.publish("items", "post", req.body.url, JSON.stringify(newItem));
+        mqttPublisher.publish("items", "post", req.body.url, JSON.stringify(newItem));
 
         res.status(201).json(newItem);
     } catch (error) {
@@ -59,7 +59,7 @@ itemController.patch("/items/:id", async (req, res) => {
             return res.status(404).send(`Item with id ${req.params.id} not found.`);
         }
 
-        await mqttPublisher.publish("items", "patch", req.body.url, JSON.stringify(updatedItem));
+        mqttPublisher.publish("items", "patch", req.body.url, JSON.stringify(updatedItem));
 
         res.json(updatedItem);
     } catch (error) {
@@ -75,7 +75,7 @@ itemController.delete("/items/:id", async (req, res) => {
             return res.status(404).send(`Item with id ${req.params.id} not found.`);
         }
 
-        await mqttPublisher.publish("items", "delete", req.body.url, JSON.stringify(deletedItem));
+        mqttPublisher.publish("items", "delete", req.body.url, JSON.stringify(deletedItem));
 
         res.status(204).send();
     } catch (error) {

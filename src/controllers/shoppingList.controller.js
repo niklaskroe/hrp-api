@@ -44,7 +44,7 @@ shoppingListController.post('/shopping-lists', async (req, res) => {
     try {
         const newShoppingList = await shoppingListService.create(req.body);
 
-        await mqttPublisher.publishAsync("shopping-lists", "post", req.body.url, JSON.stringify(newShoppingList));
+        mqttPublisher.publishAsync("shopping-lists", "post", req.body.url, JSON.stringify(newShoppingList));
 
         res.status(201).json(newShoppingList);
     } catch (error) {
@@ -60,7 +60,7 @@ shoppingListController.patch('/shopping-lists/:id', async (req, res) => {
             return res.status(404).send(`Shopping list with id ${req.params.id} not found.`);
         }
 
-        await mqttPublisher.publishAsync('shopping-lists', 'patch', req.body.url, JSON.stringify(updatedShoppingList));
+        mqttPublisher.publish('shopping-lists', 'patch', req.body.url, JSON.stringify(updatedShoppingList));
 
         res.json(updatedShoppingList);
     } catch (error) {
@@ -79,7 +79,7 @@ shoppingListController.delete('/shopping-lists/:id', async (req, res) => {
         // remove storage from all items
         await itemService.removeShoppingListFromItems(req.params.id);
 
-        await mqttPublisher.publishAsync('shopping-lists', 'delete', req.body.url, JSON.stringify(deletedShoppingList));
+        mqttPublisher.publish('shopping-lists', 'delete', req.body.url, JSON.stringify(deletedShoppingList));
 
         res.json(deletedShoppingList);
     } catch (error) {
