@@ -39,7 +39,7 @@ itemController.get("/items/:id", async (req, res) => {
     }
 });
 
-itemController.post("/items", async (req, res, next) => {
+itemController.post("/items", async (req, res) => {
     try {
         const newItem = await itemService.create(req.body);
 
