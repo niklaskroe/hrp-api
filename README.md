@@ -50,7 +50,7 @@ It should say the following in your console:
 
 You can now access the api.
 
-### 3. Receiving MQTT messages
+### 4. Receiving MQTT messages
 
 To recieve the MQTT messages published by the HRP API run the following command in another console window / tab:
 
