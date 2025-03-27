@@ -73,19 +73,12 @@ It should say the following in your console:
 [MQTTSubscriber] 🔔 Subscribed to WWI23B2/kroeger/shopping-lists
 ```
 
-## Commit Guidelines
+## AI Usage Disclosure
 
-| Prefix   | Usecase                                                                                         | Example                                                                 |
-|----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| feat     | Implementation of a new feature.                                                                | "feat: add ability to view most popular posts"                          |
-| fix      | A bug fix (not a build-process fix).                                                            | "fix: check if file exists before attempting to unlink"                 |
-| docs     | Update to project documentation.                                                                | "docs: add detailed installation instructions for Windows"              |
-| style    | Update to code formatting.                                                                      | "style: convert from 4 space indentation to 2 spaces"                   |
-| refactor | Refactoring of code: A code change that neither fixes a bug nor adds a feature.                 | "refactor: rename ArticleController to PostController"                  |
-| test     | Adding or updating tests.                                                                       | "test: add assertions for Collection update and destroy methods"        |
-| chore    | Updates to dependencies.                                                                        | "chore: bump mssql-jdbc to v11.2.3.jre17"                               |
-| ci       | Updates to CI/CD related files and scripts                                                      | "ci: add test step to test application performance"                     |
-| build    | Changes that affect the build system or external dependencies (angular.json, webpack, npm, ...) | "build: set default ChangeDetection to OnPush for component generation" |
+GitHub Copilot has been used to generate the OpenAPI documentation in the swagger format and generate some of the JS-Doc comments.
+The idea for the project was created in collaboration with ChatGPT (listing possible ideas, rubber ducking "sessions").
+
+Everything else was written by hand and not vibe-coded.
 
 ## Entity Relationship Model
 
@@ -126,3 +119,17 @@ The endpoint `/shopping-lists/{id}/items` and `/storages/{id}/items` do exist fo
 Enabling POST requests to these endpoints to create an item in said collection would not only be a bit redundant but also adding complexity. POST requests on these endpoints would require
 all other CRUD operations as well, which would add another layer in the endpoint URL (e.g. `/shopping-lists/{id}/items/{itemId}`). These operations can easily be achieved with the existing
 endpoint `/items/{id}` and the correlating shopping-list or storage ID in the request body. This would also be the preferred use from a practical UI perspective.
+
+## Commit Guidelines
+
+| Prefix   | Usecase                                                                                         | Example                                                                 |
+|----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| feat     | Implementation of a new feature.                                                                | "feat: add ability to view most popular posts"                          |
+| fix      | A bug fix (not a build-process fix).                                                            | "fix: check if file exists before attempting to unlink"                 |
+| docs     | Update to project documentation.                                                                | "docs: add detailed installation instructions for Windows"              |
+| style    | Update to code formatting.                                                                      | "style: convert from 4 space indentation to 2 spaces"                   |
+| refactor | Refactoring of code: A code change that neither fixes a bug nor adds a feature.                 | "refactor: rename ArticleController to PostController"                  |
+| test     | Adding or updating tests.                                                                       | "test: add assertions for Collection update and destroy methods"        |
+| chore    | Updates to dependencies.                                                                        | "chore: bump mssql-jdbc to v11.2.3.jre17"                               |
+| ci       | Updates to CI/CD related files and scripts                                                      | "ci: add test step to test application performance"                     |
+| build    | Changes that affect the build system or external dependencies (angular.json, webpack, npm, ...) | "build: set default ChangeDetection to OnPush for component generation" |
