@@ -1,5 +1,6 @@
 import ShoppingList from '../models/shoppingList.model.js';
 import logging from "logging";
+import Item from "../models/item.model.js";
 
 const logger = logging.default("ShoppingListService");
 
