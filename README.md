@@ -98,7 +98,7 @@ It should say the following in your console:
 | ✔           | GET    | /shopping-lists                | Retrieve all shopping lists (Collection).                                                                     |
 | ✔           | GET    | /shopping-lists/{id}           | Retrieve a shopping list (resource) that has the {id}.                                                        |
 | ✔           | GET    | /shopping-lists/{id}/items     | Returns all items (collection) of a shopping list (resource) with the {id}.                                   |
-|             | POST   | /shopping-lists/{id}/items     | Creates a new item (resource) in the shopping list (collection) with the {id}.                                |
+| X           | POST   | /shopping-lists/{id}/items     | Creates a new item (resource) in the shopping list (collection) with the {id}.                                |
 | ✔           | POST   | /shopping-lists                | Creates a new shopping list (resource) with the data provided in the request body.                            |
 | ✔           | PATCH  | /shopping-lists/{id}           | Updates an existing shopping list with the {id}. The request body contains only the fields to be overwritten. |
 | ✔           | DELETE | /shopping-lists/{id}           | Deletes the shopping list (resource) with the {id}.                                                           |
@@ -110,10 +110,19 @@ It should say the following in your console:
 | ✔           | GET    | /storages                      | Retrieve all storages (Collection).                                                                           |
 | ✔           | GET    | /storages/{id}                 | Retrieve a storage (resource) that has the {id}.                                                              |
 | ✔           | GET    | /storages/{id}/items           | Returns all items (collection) of a storage (resource) with the {id}.                                         |
-|             | POST   | /storages/{id}/items           | Creates a new item (resource) in the storage (collection) with the {id}.                                      |
+| X           | POST   | /storages/{id}/items           | Creates a new item (resource) in the storage (collection) with the {id}.                                      |
 | ✔           | POST   | /storages                      | Creates a new storage (resource) with the data provided in the request body.                                  |
 | ✔           | PATCH  | /storages/{id}                 | Updates an existing storage with the {id}. The request body contains only the fields to be overwritten.       |
 | ✔           | DELETE | /storages/{id}                 | Deletes the storage (resource) with the {id}.                                                                 |
 | ✔           | GET    | /items?search={query}          | Returns all items (collection) that match the search query.                                                   |
 | ✔           | GET    | /shopping-lists?search={query} | Returns all shopping lists (collection) that match the search query.                                          |
 | ✔           | GET    | /storages?search={query}       | Returns all storages (collection) that match the search query.                                                |
+
+### Why are some endpoints not implemented?
+
+Some endpoints are not implemented because they are not necesssary for the use case and would be making the API more incomplete than without them. And here is why:
+
+The endpoint `/shopping-lists/{id}/items` and `/storages/{id}/items` do exist for GET requests to fetch the collection of all Items in the specified storage or shopping-list respectively.
+Enabling POST requests to these endpoints to create an item in said collection would not only be a bit redundant but also adding complexity. POST requests on these endpoints would require
+all other CRUD operations as well, which would add another layer in the endpoint URL (e.g. `/shopping-lists/{id}/items/{itemId}`). These operations can easily be achieved with the existing
+endpoint `/items/{id}` and the correlating shopping-list or storage ID in the request body. This would also be the preferred use from a practical UI perspective.
