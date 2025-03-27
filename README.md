@@ -104,9 +104,6 @@ It should say the following in your console:
 | ✔           | DELETE | /shopping-lists/{id}           | Deletes the shopping list (resource) with the {id}.                                                           |
 | ✔           | GET    | /items                         | Returns all items (collection) that exist.                                                                    |
 | ✔           | GET    | /items/{id}                    | Returns the item (resource) with the {id}.                                                                    |
-|             | GET    | /items/{id}/shopping-lists     | Returns the shopping list (resource) of the item with the {id}.                                               |
-|             | PATCH  | /items/{id}/shopping-lists     | Updates the shopping list of the item with the {id} using the fields provided in the request body.            |
-|             | DELETE | /items/{id}/shopping-lists     | Deletes the shopping list of the item with the {id}.                                                          |
 | ✔           | POST   | /items                         | Creates a new item with the data provided in the request body.                                                |
 | ✔           | PATCH  | /items/{id}                    | Updates an existing item with the {id}. The request body contains only the fields to be overwritten.          |
 | ✔           | DELETE | /items/{id}                    | Deletes the item (resource) with the {id}.                                                                    |
@@ -117,9 +114,6 @@ It should say the following in your console:
 | ✔           | POST   | /storages                      | Creates a new storage (resource) with the data provided in the request body.                                  |
 | ✔           | PATCH  | /storages/{id}                 | Updates an existing storage with the {id}. The request body contains only the fields to be overwritten.       |
 | ✔           | DELETE | /storages/{id}                 | Deletes the storage (resource) with the {id}.                                                                 |
-|             | GET    | /items/{id}/storages           | Returns the storage (resource) of the item with the {id}.                                                     |
-|             | PATCH  | /items/{id}/storages           | Updates the storage of the item with the {id} using the fields provided in the request body.                  |
-|             | DELETE | /items/{id}/storages           | Deletes the storage of the item with the {id}.                                                                |
 | ✔           | GET    | /items?search={query}          | Returns all items (collection) that match the search query.                                                   |
 | ✔           | GET    | /shopping-lists?search={query} | Returns all shopping lists (collection) that match the search query.                                          |
 | ✔           | GET    | /storages?search={query}       | Returns all storages (collection) that match the search query.                                                |
