@@ -76,7 +76,7 @@ async function deleteById(id) {
 async function search(query) {
     try {
         // regex for case-insensitive search
-        return await Storage.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
+        return await Storage.find({name: new RegExp(`^${query}`, 'i')}, undefined, undefined);
     } catch (error) {
         logger.error("Error searching for storages:", error);
         console.error("Error searching for storages:", error);

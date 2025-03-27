@@ -75,7 +75,7 @@ async function deleteById(id) {
 async function search(query) {
     try {
         // case-insensitive search
-        return await ShoppingList.find({name: new RegExp(`^${query}$`, 'i')}, undefined, undefined);
+        return await ShoppingList.find({name: new RegExp(`^${query}`, 'i')}, undefined, undefined);
     } catch (error) {
         logger.error("Error searching for shoppingLists:", error);
         throw new Error(error.message);
